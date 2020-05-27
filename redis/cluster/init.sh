@@ -1,3 +1,4 @@
+#!/bin/bash
 
 PORT=7000
 ENDPORT=7006
@@ -64,4 +65,6 @@ then
     rm redis-*.log
     exit 0
 fi
+
+echo "Usage: $0 [start|open|build|close|clean]"
 
