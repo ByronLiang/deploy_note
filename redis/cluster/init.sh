@@ -45,8 +45,16 @@ fi
 if [ "$1" == "build" ]
 then
 	HOSTS=""
+    HOST="127.0.0.1"
+    
+# 对指定IP进行配置集群
+    if [ -n "$2" ]
+    then
+        HOST="$2"
+    fi
+    
     while [ $((PORT < ENDPORT)) != "0" ]; do
-        HOSTS="$HOSTS 127.0.0.1:$PORT"
+        HOSTS="$HOSTS $HOST:$PORT"
 		PORT=$((PORT+1))
     done
     redis-cli --cluster create $HOSTS --cluster-replicas 1

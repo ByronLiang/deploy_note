@@ -12,6 +12,8 @@ tar -zxvf redis-5.0.8.tar.gz
 
 - cd redis-5.0.8
 - make && make PREFIX=/usr/local/bin/redis install (指定在`/usr/local/bin/redis`路径安装)
+- cp -ri /usr/local/bin/redis/bin/. /usr/local/bin
+- rm -rf /usr/local/bin/redis
 
 ##  复制配置文件
 
