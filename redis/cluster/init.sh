@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PORT=7000
-ENDPORT=7006
+ENDPORT=7002
 
 if [ "$1" == "start" ]
 then
@@ -16,6 +16,12 @@ then
 		sed -i "s/dbfilename dump-7000.rdb/dbfilename dump-$PORT.rdb/" "./$PORT/redis-$PORT.conf"
 		sed -i "s/logfile ''/logfile \/var\/log\/redis\/cluster\/redis-$PORT.log/" "./$PORT/redis-$PORT.conf"
 		sed -i "s/pidfile ''/pidfile \/var\/run\/redis-$PORT.pid/" "./$PORT/redis-$PORT.conf"
+        # 允许远程连接配置
+        if [ "$2" == "remote" ]
+        then
+            sed -i "s/bind 127.0.0.1/# bind 127.0.0.1/" "./$PORT/redis-$PORT.conf"
+            sed -i "s/protected-mode yes/protected-mode no/" "./$PORT/redis-$PORT.conf"
+        fi
         PORT=$((PORT+1))
     done
     exit 0
