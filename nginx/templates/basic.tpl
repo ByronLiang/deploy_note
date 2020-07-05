@@ -20,6 +20,19 @@ server {
     sendfile off;
 
     client_max_body_size 100m;
+    
+    # 配置跨域header
+
+    # add_header Strict-Transport-Security "max-age=63072000 includesSubdomain; preload";
+    
+    add_header Access-Control-Allow-Origin "$http_origin" always;
+    add_header Access-Control-Allow-Methods 'HEAD, GET, POST, DELETE, PUT, OPTIONS' always;
+    add_header Access-Control-Allow-Headers 'DNT,Authorization,User-Agent,X-XSRF-TOKEN,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,X-APP-KEY,X-APP-SIGN' always;
+    add_header Access-Control-Allow-Credentials 'true' always;
+    add_header Access-Control-Max-Age 1728000 always;
+    if ($request_method = 'OPTIONS') {
+        return 204;
+    }
 
     location ~ \.php$ {
         fastcgi_split_path_info ^(.+\.php)(/.+)$;
