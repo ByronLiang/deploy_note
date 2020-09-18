@@ -1,0 +1,39 @@
+version: "3.7"
+networks:
+  app-tier:
+    driver: bridge
+services:
+  redis:
+    image: redis
+    container_name: "my-redis"
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - /dockerShareFile/redis/redis.conf:/usr/local/etc/redis/redis.conf
+      - /dockerShareFile/redis/data:/data
+  # mysql:
+  #   image: mysql:5.7
+  #   container_name: "my-mysql"
+  #   ports:
+  #     - "3306:3306"
+  #   volumes:
+  #     - /dockerShareFile/mysql/conf:/etc/mysql/conf.d
+  #   environment:    # 自定义环境变量
+  #     MYSQL_ROOT_PASSWORD: 123456
+  etcd:
+    image: 'bitnami/etcd'
+    container_name: 'c-etcd'
+    user: root
+    environment:
+      - ALLOW_NONE_AUTHENTICATION=yes
+      - ETCD_NAME=node1
+      - ETCD_DATA_DIR=/opt/bitnami/etcd/data
+    ports:
+      - 2379:2379
+      - 2380:2380
+    volumes:
+      # - /dockerShareFile/etcd/etcd.conf.yml:/opt/bitnami/etcd/conf/etcd.conf.yml
+      - /dockerShareFile/etcd/data:/opt/bitnami/etcd/data
+    networks:
+      - app-tier
