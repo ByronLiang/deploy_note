@@ -1,4 +1,4 @@
-FROM golang:1.14
+FROM golang:1.14 as builder
 
 # 环境变量设置
 
@@ -23,3 +23,11 @@ RUN go build
 ENTRYPOINT ["./balance"]
 
 # ENTRYPOINT ["go", "run", "main.go"]
+
+# 制作小体积镜像文件 只将编译后文件放进镜像里
+
+FROM scratch
+
+COPY --from=builder /go/src/balance/balance /
+
+ENTRYPOINT ["./balance"]

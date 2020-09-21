@@ -1,0 +1,7 @@
+name: '3-etcd'
+# Path to the data directory
+# data-dir: '/opt/bitnami/etcd/data'
+# wal-dir: '/opt/bitnami/etcd/wal'
+listen-client-urls: 'http://0.0.0.0:2379'
+# 配置本地IP地址 实现外部机器对容器里的etcd远程访问
+advertise-client-urls: 'http://192.168.31.225:2379'
