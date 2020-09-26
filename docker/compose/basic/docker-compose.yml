@@ -38,3 +38,39 @@ services:
       - /dockerShareFile/etcd/data:/opt/bitnami/etcd/data
     networks:
       - app-tier
+  etcd-cluster:
+    image: 'bitnami/etcd'
+    container_name: 'etc02'
+    user: root
+    environment:
+      - ALLOW_NONE_AUTHENTICATION=yes
+      # - ETCD_NAME=node1
+      - ETCD_CONFIG_FILE=/opt/bitnami/etcd/conf/etcd.conf.yml
+      # - ETCD_DATA_DIR=/opt/bitnami/etcd/data
+    ports:
+      - 2379:2379
+      - 2380:2380
+    volumes:
+      - /dockerShareFile/etcd/etcd-cluster.conf.yml:/opt/bitnami/etcd/conf/etcd.conf.yml
+      - /dockerShareFile/etcd/cluster:/opt/bitnami/etcd/data
+    networks:
+      - app-tier
+  
+  etcd01:
+    image: 'bitnami/etcd'
+    container_name: 'etc01'
+    user: root
+    environment:
+      - ALLOW_NONE_AUTHENTICATION=yes
+      # - ETCD_NAME=node1
+      - ETCD_CONFIG_FILE=/opt/bitnami/etcd/conf/etcd.conf.yml
+      # - ETCD_DATA_DIR=/opt/bitnami/etcd/data
+    ports:
+      - 2379:2379
+      - 2380:2380
+    volumes:
+      - /dockerShareFile/etcd/etcd01.conf.yml:/opt/bitnami/etcd/conf/etcd.conf.yml
+      - /dockerShareFile/etcd/cluster01:/opt/bitnami/etcd/data
+    networks:
+      - app-tier
+
