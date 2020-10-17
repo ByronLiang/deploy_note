@@ -2,6 +2,8 @@ version: "3.7"
 services:
   backend:
     build: builder
+    # 指定编译后镜像名称与tag
+    image: backend:dev
     # build: backend
     ports:
       - "8000:8000"
