@@ -20,7 +20,7 @@ service mysql restart
 mysql --user="root" --password="secret" -e "CREATE USER 'homestead'@'127.0.0.1' IDENTIFIED BY 'secret';"
 mysql --user="root" --password="secret" -e "GRANT ALL ON *.* TO 'homestead'@'127.0.0.1' IDENTIFIED BY 'secret' WITH GRANT OPTION;"
 mysql --user="root" --password="secret" -e "GRANT ALL ON *.* TO 'homestead'@'localhost' IDENTIFIED BY 'secret' WITH GRANT OPTION;"
-mysql --user="root" --password="secret" -e "GRANT ALL ON *.* TO 'byron_admin'@'%' IDENTIFIED BY '123456' WITH GRANT OPTION;"
+mysql --user="root" --password="secret" -e "GRANT ALL ON *.* TO 'mysql_admin'@'%' IDENTIFIED BY '123456' WITH GRANT OPTION;"
 mysql --user="root" --password="secret" -e "FLUSH PRIVILEGES;"
 
 service mysql restart
