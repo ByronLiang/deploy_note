@@ -34,6 +34,9 @@ services:
       - KAFKA_CFG_LOG_RETENTION_HOURS=6
       # 开启JMX监控
       - JMX_PORT=9999
+      # 配置 JMX 远程连接地址与端口等 hostname: 宿主机IP地址; jmxremote.rmi.port 与 JMX_PORT 端口号需要一致
+      # 文档解析: https://docs.oracle.com/javase/8/docs/technotes/guides/management/agent.html
+      - KAFKA_JMX_OPTS=-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=192.168.31.79 -Dcom.sun.management.jmxremote.rmi.port=9999
     # volumes:
       # - ./kafka:/bitnami/kafka
     depends_on:
